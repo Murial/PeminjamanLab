@@ -5,6 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page language="java"%>
+<%@page import="model.*" %>
+<%@page import="controller.*" %>
+<jsp:useBean id="Ruang" class="model.Ruang" />
+<% Ruang r = null;
+    Ruang[] daftarRuang = (new PinjamLabHome()).getDaftarRuang();
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -293,18 +300,37 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form action="TambahPinjamLab.jsp" method="POST">
                                     <h6 class="heading-small text-muted mb-4">Informasi Lab</h6>
                                     <div class="pl-lg-4">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="input-username">Pilih Ruangan</label>
-                                                    <select class="form-control">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
+                                                    <select class="form-control" name="ruangan">
+                                                        
+                                                        <option disabled selected value> -- Pilih Ruangan -- </option>
+                                                        
+                                                        <%
+                                                            for (int i = 0; i < daftarRuang.length; i++) {
+                                                                r = daftarRuang[i];
+                                                        %>
+                                                        
+                                                        <jsp:setProperty name="Ruang" property="id_ruangan" value="<%=r.getId_ruangan()%>" />
+                                                        <jsp:setProperty name="Ruang" property="nama_ruangan" value="<%=r.getNama_ruangan()%>" />
+                                                        <jsp:setProperty name="Ruang" property="status" value="<%=r.getStatus()%>" />
+                                                        <jsp:setProperty name="Ruang" property="id_user" value="<%=r.getId_user()%>" />
+                                                        <jsp:setProperty name="Ruang" property="kondisi_ruangan" value="<%=r.getKondisi_ruangan()%>" />
+                                                        
+                                                        <option>
+                                                            R   <jsp:getProperty name="Ruang" property="id_ruangan" /> 
+                                                            (
+                                                                <jsp:getProperty name="Ruang" property="nama_ruangan" />
+                                                            )
+                                                        </option>
+                                                        
+                                                        <%}%>
+                                                        
                                                     </select>
                                                 </div>
                                             </div>

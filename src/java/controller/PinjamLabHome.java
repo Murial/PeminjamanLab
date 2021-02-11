@@ -7,11 +7,11 @@ package controller;
 
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.AksesJdbc;
-import model.PinjamLab;
+import model.*;
 
 /**
  *
@@ -69,5 +69,68 @@ public class PinjamLabHome {
             System.out.println(e);
         }
         return con;
+    }
+
+    public Ruang[] getDaftarRuang() {
+
+        Ruang[] daftarRuang = null;
+        Ruang tempRuang = null;
+        ArrayList listRuang = new ArrayList();
+        String pwd = "";
+        String login = "root";
+        Connection con = null;
+        ResultSet rs = null;
+        AksesJdbc db = new AksesJdbc("lab_db", login, pwd);
+        String sql = "SELECT * FROM ruang";
+        try {
+            con = db.connect();
+            String nim = null;
+            rs = db.executeQuery(sql);
+            while (rs.next()) {
+                tempRuang = new Ruang();
+                tempRuang.setId_ruangan(rs.getString("id_ruangan"));
+                tempRuang.setNama_ruangan(rs.getString("nama_ruangan"));
+                tempRuang.setStatus(rs.getString("status"));
+                tempRuang.setId_user(rs.getString("id_user"));
+                tempRuang.setKondisi_ruangan(rs.getString("kondisi_ruangan"));
+                listRuang.add(tempRuang);
+            }
+            daftarRuang = new Ruang[listRuang.size()];
+            listRuang.toArray(daftarRuang);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                db.disconnect();
+                return daftarRuang;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+    public static int save(PinjamLab pl) throws SQLException {
+        int status = 0;
+        
+        String cek_in = pl.getCek_in_tanggal() + " " + pl.getCek_in_jam();
+        String cek_out = pl.getCek_out_tanggal() + " " + pl.getCek_out_jam();
+        
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO peminjaman_r(id_peminjaman_r, id_user,id_ruangan, cek_in, cek_out, keperluan) values(?,?,?,?,?,?)");
+//            ps.setString(1, pl.getId_peminjaman_r());
+//            ps.setString(2, pl.getId_user());
+            ps.setString(1, "pem_r_003");
+            ps.setString(2, "user_002");
+            ps.setString(3, pl.getId_ruangan());
+            ps.setString(4, cek_in);
+            ps.setString(5, cek_out);
+            ps.setString(6, pl.getKeperluan());
+            status = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
     }
 }

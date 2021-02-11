@@ -9,7 +9,6 @@
 <%@page import="model.*" %>
 <%@page import="controller.*" %>
 <jsp:useBean id="PinjamLab" class="model.PinjamLab" />
-<jsp:useBean id="PinjamLabHome" class="controller.PinjamLabHome" />
 <% PinjamLab pl = null;
     PinjamLab[] daftarPinjamLab = (new PinjamLabHome()).getDaftarPinjamLab();
 %>
@@ -40,6 +39,7 @@
 
             <!-- Main content -->
             <div class="main-content" id="panel">
+                
                 <!-- Topnav -->
                 <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
                     <div class="container-fluid">
@@ -278,8 +278,10 @@
 
                 <!-- Header -->
                 <div class="header bg-primary pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(assets/img/theme/yuda.jpg); background-size: cover; background-position: center top;";>
-                    <!-- Mask -->
+                    
+                <!-- Mask -->
                 <span class="mask bg-gradient-default opacity-7"></span>
+                
                 <!-- Header container -->
                 <div class="container-fluid d-flex align-items-center">
                     <div class="row">
@@ -291,12 +293,13 @@
                     </div>
                 </div>
                 </div>
-
+                
                 <!-- Page content -->
                 <div class="container-fluid mt--6">
                     <div class="row">
                         <div class="col">
                             <div class="card">
+                                
                                 <!-- Card header -->
                                 <div class="card-header border-0">
                                     <h3 class="mb-0">Tabel Peminjaman Lab</h3>

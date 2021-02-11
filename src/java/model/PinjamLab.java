@@ -5,8 +5,7 @@
  */
 package model;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.*;
 
 /**
  *
@@ -20,8 +19,7 @@ public class PinjamLab {
     Date cek_out_tanggal;
     Time cek_in_jam;
     Time cek_out_jam;
-    String keperluan;
-    
+    String keperluan;    
 
     public void setId_peminjaman_r(String id_peminjaman_r) {
         this.id_peminjaman_r = id_peminjaman_r;
@@ -55,6 +53,8 @@ public class PinjamLab {
         this.keperluan = keperluan;
     }
 
+    
+   
     public String getId_peminjaman_r() {
         return id_peminjaman_r;
     }
@@ -82,8 +82,6 @@ public class PinjamLab {
     public Time getCek_out_jam() {
         return cek_out_jam;
     }
-
-    
 
     public String getKeperluan() {
         return keperluan;
