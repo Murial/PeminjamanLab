@@ -15,11 +15,9 @@ public class PinjamLab {
     String id_peminjaman_r;
     String id_user;
     String id_ruangan;
-    Date cek_in_tanggal;
-    Date cek_out_tanggal;
-    Time cek_in_jam;
-    Time cek_out_jam;
-    String keperluan;    
+    String keperluan; 
+    Timestamp cek_in;
+    Timestamp cek_out;
 
     public void setId_peminjaman_r(String id_peminjaman_r) {
         this.id_peminjaman_r = id_peminjaman_r;
@@ -33,20 +31,12 @@ public class PinjamLab {
         this.id_ruangan = id_ruangan;
     }
 
-    public void setCek_in_tanggal(Date cek_in_tanggal) {
-        this.cek_in_tanggal = cek_in_tanggal;
+    public void setCek_in(Timestamp cek_in) {
+        this.cek_in = cek_in;
     }
 
-    public void setCek_out_tanggal(Date cek_out_tanggal) {
-        this.cek_out_tanggal = cek_out_tanggal;
-    }
-
-    public void setCek_in_jam(Time cek_in_jam) {
-        this.cek_in_jam = cek_in_jam;
-    }
-
-    public void setCek_out_jam(Time cek_out_jam) {
-        this.cek_out_jam = cek_out_jam;
+    public void setCek_out(Timestamp cek_out) {
+        this.cek_out = cek_out;
     }
 
     public void setKeperluan(String keperluan) {
@@ -67,21 +57,14 @@ public class PinjamLab {
         return id_ruangan;
     }
 
-    public Date getCek_in_tanggal() {
-        return cek_in_tanggal;
+    public Timestamp getCek_in() {
+        return cek_in;
     }
 
-    public Date getCek_out_tanggal() {
-        return cek_out_tanggal;
+    public Timestamp getCek_out() {
+        return cek_out;
     }
 
-    public Time getCek_in_jam() {
-        return cek_in_jam;
-    }
-
-    public Time getCek_out_jam() {
-        return cek_out_jam;
-    }
 
     public String getKeperluan() {
         return keperluan;

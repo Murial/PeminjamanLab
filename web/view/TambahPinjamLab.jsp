@@ -4,8 +4,7 @@
     Author     : ASUS
 --%>
 
-<%@page import="model.*" %>
-<%@page import="controller.*" %>
+<%@page import="controller.PinjamLabHome" %>
 <jsp:useBean id="pl" class="model.PinjamLab"/>
 <jsp:setProperty name="pl" property="*" />
 

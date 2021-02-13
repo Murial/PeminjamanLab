@@ -300,14 +300,18 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                
+                                <!--FORM-->
                                 <form action="TambahPinjamLab.jsp" method="POST">
                                     <h6 class="heading-small text-muted mb-4">Informasi Lab</h6>
                                     <div class="pl-lg-4">
                                         <div class="row">
                                             <div class="col">
+                                                
+                                                <!--PILIH RUANGAN-->
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="input-username">Pilih Ruangan</label>
-                                                    <select class="form-control" name="ruangan">
+                                                    <select class="form-control" name="id_ruangan">
                                                         
                                                         <option disabled selected value> -- Pilih Ruangan -- </option>
                                                         
@@ -322,7 +326,7 @@
                                                         <jsp:setProperty name="Ruang" property="id_user" value="<%=r.getId_user()%>" />
                                                         <jsp:setProperty name="Ruang" property="kondisi_ruangan" value="<%=r.getKondisi_ruangan()%>" />
                                                         
-                                                        <option>
+                                                        <option value="<jsp:getProperty name="Ruang" property="id_ruangan" /> ">
                                                             R   <jsp:getProperty name="Ruang" property="id_ruangan" /> 
                                                             (
                                                                 <jsp:getProperty name="Ruang" property="nama_ruangan" />
@@ -333,20 +337,27 @@
                                                         
                                                     </select>
                                                 </div>
+                                                        
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6">
+                                                
+                                                <!--CHECK IN-->
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="input-username">Check-In</label>
-                                                    <input type="datetime-local" id="input-username" class="form-control">
+                                                    <input type="datetime-local" id="input-username" class="form-control" name="cek_in">
                                                 </div>
+                                                
                                             </div>
                                             <div class="col-lg-6">
+                                                
+                                                <!--CHECK OUT-->
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="input-email">Check-Out</label>
-                                                    <input type="datetime-local" id="input-email" class="form-control">
+                                                    <input type="datetime-local" id="input-email" class="form-control" name="cek_out">
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -354,10 +365,13 @@
                                     <!-- Description -->
                                     <h6 class="heading-small text-muted mb-4">Deskripsi</h6>
                                     <div class="pl-lg-4">
+                                        
+                                        <!--KEPERLUAN-->
                                         <div class="form-group">
                                             <label class="form-control-label">Keperluan Peminjam</label>
-                                            <textarea rows="4" class="form-control" placeholder="Alasan keperluan peminjaman ..."></textarea>
+                                            <textarea rows="4" class="form-control" placeholder="Alasan keperluan peminjaman ..." name="keperluan"></textarea>
                                         </div>
+                                        
                                     </div>
 
                                     <div class="form-group text-center">

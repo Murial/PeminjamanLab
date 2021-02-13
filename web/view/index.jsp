@@ -9,8 +9,9 @@
 <%@page import="model.*" %>
 <%@page import="controller.*" %>
 <jsp:useBean id="PinjamLab" class="model.PinjamLab" />
+<jsp:useBean id="PinjamLabHome" class="controller.PinjamLabHome" />
 <% PinjamLab pl = null;
-    PinjamLab[] daftarPinjamLab = (new PinjamLabHome()).getDaftarPinjamLab();
+    PinjamLab[] daftarPinjamLab = PinjamLabHome.getDaftarPinjamLab();
 %>
 
 <!DOCTYPE html>
@@ -331,12 +332,9 @@
                                         <jsp:setProperty name="PinjamLab" property="id_peminjaman_r" value="<%=pl.getId_peminjaman_r()%>" />
                                         <jsp:setProperty name="PinjamLab" property="id_user" value="<%=pl.getId_user()%>" />
                                         <jsp:setProperty name="PinjamLab" property="id_ruangan" value="<%=pl.getId_ruangan()%>" />
-                                        <jsp:setProperty name="PinjamLab" property="cek_in_tanggal" value="<%=pl.getCek_in_tanggal()%>" />
-                                        <jsp:setProperty name="PinjamLab" property="cek_out_tanggal" value="<%=pl.getCek_out_tanggal()%>" />
-                                        <jsp:setProperty name="PinjamLab" property="cek_in_jam" value="<%=pl.getCek_in_jam()%>" />
-                                        <jsp:setProperty name="PinjamLab" property="cek_out_jam" value="<%=pl.getCek_out_jam()%>" />
+                                        <jsp:setProperty name="PinjamLab" property="cek_in" value="<%=pl.getCek_in()%>" />
+                                        <jsp:setProperty name="PinjamLab" property="cek_out" value="<%=pl.getCek_out()%>" />
                                         <jsp:setProperty name="PinjamLab" property="keperluan" value="<%=pl.getKeperluan()%>" />
-
 
                                         <tr>
                                             <td>
@@ -353,13 +351,11 @@
                                             </td>
                                             <td>
                                                 <!--CHECK IN-->
-                                                <jsp:getProperty name="PinjamLab" property="cek_in_tanggal" />
-                                                <jsp:getProperty name="PinjamLab" property="cek_in_jam" />    
+                                                <jsp:getProperty name="PinjamLab" property="cek_in" />
                                             </td>
                                             <td>
                                                 <!--CHECK OUT-->
-                                                <jsp:getProperty name="PinjamLab" property="cek_out_tanggal" />
-                                                <jsp:getProperty name="PinjamLab" property="cek_out_jam" />
+                                                <jsp:getProperty name="PinjamLab" property="cek_out" />
                                             </td>
                                             <td>
                                                 <!--KEPERLUAN-->

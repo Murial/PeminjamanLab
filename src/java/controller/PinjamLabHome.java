@@ -6,11 +6,11 @@
 package controller;
 
 import com.mysql.jdbc.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import model.*;
 
 /**
@@ -38,10 +38,8 @@ public class PinjamLabHome {
                 tempPinjamLab.setId_peminjaman_r(rs.getString("id_peminjaman_r"));
                 tempPinjamLab.setId_user(rs.getString("id_user"));
                 tempPinjamLab.setId_ruangan(rs.getString("id_ruangan"));
-                tempPinjamLab.setCek_in_tanggal(rs.getDate("cek_in"));
-                tempPinjamLab.setCek_out_tanggal(rs.getDate("cek_out"));
-                tempPinjamLab.setCek_in_jam(rs.getTime("cek_in"));
-                tempPinjamLab.setCek_out_jam(rs.getTime("cek_out"));
+                tempPinjamLab.setCek_in(rs.getTimestamp("cek_in"));
+                tempPinjamLab.setCek_out(rs.getTimestamp("cek_out"));
                 tempPinjamLab.setKeperluan(rs.getString("keperluan"));
                 listPinjamLab.add(tempPinjamLab);
             }
@@ -110,22 +108,74 @@ public class PinjamLabHome {
         }
     }
 
-    public static int save(PinjamLab pl) throws SQLException {
+    public static String getLastId() {
+
+        String ids = "";
+
+        try {
+            String Host = "jdbc:mysql://localhost:3306/lab_db";
+            Connection connection = null;
+            Statement statement = null;
+            ResultSet rs = null;
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = (Connection) DriverManager.getConnection(Host, "root", "");
+            statement = connection.createStatement();
+            String Data = "SELECT id_peminjaman_r FROM `peminjaman_r` ORDER BY id_peminjaman_r DESC LIMIT 1";
+
+            rs = statement.executeQuery(Data);
+            int idsum = 0;
+            if (rs.first()) {
+                ids = rs.getString("id_peminjaman_r");
+            }
+            idsum = Integer.parseInt(ids.substring(6));
+            idsum += 1;
+            ids = "pem_r_" + Integer.toString(idsum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ids;
+    }
+
+    public static int save(PinjamLab pl) throws SQLException, ParseException {
         int status = 0;
-        
-        String cek_in = pl.getCek_in_tanggal() + " " + pl.getCek_in_jam();
-        String cek_out = pl.getCek_out_tanggal() + " " + pl.getCek_out_jam();
-        
+
         try {
             Connection con = getConnection();
+
+            java.util.Date In_date = pl.getCek_in();
+            Timestamp cek_in = new Timestamp(In_date.getTime());
+            java.util.Date Out_date = pl.getCek_in();
+            Timestamp cek_out = new Timestamp(Out_date.getTime());
+
+            String s_cek_in = cek_in.toString();
+            String s_cek_out = cek_out.toString();
+
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"),
+//                    sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            java.util.Date in = sdf2.parse(s_cek_in.replace("T", " "));
+//            java.util.Date out = sdf2.parse(s_cek_out.replace("T", " "));
+//            String Cek_in = sdf2.format(in);
+//            String Cek_out = sdf2.format(out);
+//
+//            Timestamp ts1 = Timestamp.valueOf(Cek_in);  
+//            Timestamp ts2 = Timestamp.valueOf(Cek_out);  
+//            System.out.println("Timestamp : "+ts1+ " - " + ts2);  
+//          //returns a string object in JDBC timestamp escape format .
+//            String stIn =ts1.toString();  
+//            String stOut =ts2.toString();  
+//            System.out.println("New Timespan : "+stIn + " - " + stOut);  
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+            java.util.Date date = formatter.parse(s_cek_in);
+
             PreparedStatement ps = con.prepareStatement("INSERT INTO peminjaman_r(id_peminjaman_r, id_user,id_ruangan, cek_in, cek_out, keperluan) values(?,?,?,?,?,?)");
 //            ps.setString(1, pl.getId_peminjaman_r());
 //            ps.setString(2, pl.getId_user());
-            ps.setString(1, "pem_r_003");
+            ps.setString(1, getLastId());
             ps.setString(2, "user_002");
             ps.setString(3, pl.getId_ruangan());
-            ps.setString(4, cek_in);
-            ps.setString(5, cek_out);
+            ps.setString(4, s_cek_in);
+            ps.setString(5, s_cek_out);
             ps.setString(6, pl.getKeperluan());
             status = ps.executeUpdate();
         } catch (SQLException e) {
