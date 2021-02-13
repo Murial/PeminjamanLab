@@ -38,8 +38,8 @@ public class PinjamLabHome {
                 tempPinjamLab.setId_peminjaman_r(rs.getString("id_peminjaman_r"));
                 tempPinjamLab.setId_user(rs.getString("id_user"));
                 tempPinjamLab.setId_ruangan(rs.getString("id_ruangan"));
-                tempPinjamLab.setCek_in(rs.getTimestamp("cek_in"));
-                tempPinjamLab.setCek_out(rs.getTimestamp("cek_out"));
+                tempPinjamLab.setCek_in(rs.getString("cek_in"));
+                tempPinjamLab.setCek_out(rs.getString("cek_out"));
                 tempPinjamLab.setKeperluan(rs.getString("keperluan"));
                 listPinjamLab.add(tempPinjamLab);
             }
@@ -143,39 +143,14 @@ public class PinjamLabHome {
         try {
             Connection con = getConnection();
 
-            java.util.Date In_date = pl.getCek_in();
-            Timestamp cek_in = new Timestamp(In_date.getTime());
-            java.util.Date Out_date = pl.getCek_in();
-            Timestamp cek_out = new Timestamp(Out_date.getTime());
-
-            String s_cek_in = cek_in.toString();
-            String s_cek_out = cek_out.toString();
-
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"),
-//                    sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            java.util.Date in = sdf2.parse(s_cek_in.replace("T", " "));
-//            java.util.Date out = sdf2.parse(s_cek_out.replace("T", " "));
-//            String Cek_in = sdf2.format(in);
-//            String Cek_out = sdf2.format(out);
-//
-//            Timestamp ts1 = Timestamp.valueOf(Cek_in);  
-//            Timestamp ts2 = Timestamp.valueOf(Cek_out);  
-//            System.out.println("Timestamp : "+ts1+ " - " + ts2);  
-//          //returns a string object in JDBC timestamp escape format .
-//            String stIn =ts1.toString();  
-//            String stOut =ts2.toString();  
-//            System.out.println("New Timespan : "+stIn + " - " + stOut);  
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
-            java.util.Date date = formatter.parse(s_cek_in);
-
             PreparedStatement ps = con.prepareStatement("INSERT INTO peminjaman_r(id_peminjaman_r, id_user,id_ruangan, cek_in, cek_out, keperluan) values(?,?,?,?,?,?)");
 //            ps.setString(1, pl.getId_peminjaman_r());
 //            ps.setString(2, pl.getId_user());
             ps.setString(1, getLastId());
             ps.setString(2, "user_002");
             ps.setString(3, pl.getId_ruangan());
-            ps.setString(4, s_cek_in);
-            ps.setString(5, s_cek_out);
+            ps.setString(4, pl.getCek_in());
+            ps.setString(5, pl.getCek_out());
             ps.setString(6, pl.getKeperluan());
             status = ps.executeUpdate();
         } catch (SQLException e) {

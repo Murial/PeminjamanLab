@@ -16,8 +16,8 @@ public class PinjamLab {
     String id_user;
     String id_ruangan;
     String keperluan; 
-    Timestamp cek_in;
-    Timestamp cek_out;
+    String cek_in;
+    String cek_out;
 
     public void setId_peminjaman_r(String id_peminjaman_r) {
         this.id_peminjaman_r = id_peminjaman_r;
@@ -31,11 +31,11 @@ public class PinjamLab {
         this.id_ruangan = id_ruangan;
     }
 
-    public void setCek_in(Timestamp cek_in) {
+    public void setCek_in(String cek_in) {
         this.cek_in = cek_in;
     }
 
-    public void setCek_out(Timestamp cek_out) {
+    public void setCek_out(String cek_out) {
         this.cek_out = cek_out;
     }
 
@@ -57,11 +57,11 @@ public class PinjamLab {
         return id_ruangan;
     }
 
-    public Timestamp getCek_in() {
+    public String getCek_in() {
         return cek_in;
     }
 
-    public Timestamp getCek_out() {
+    public String getCek_out() {
         return cek_out;
     }
 
