@@ -278,7 +278,7 @@
                 </nav>
 
                 <!-- Header -->
-                <div class="header bg-primary pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(assets/img/theme/yuda.jpg); background-size: cover; background-position: center top;";>
+                <div class="header bg-primary pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(assets/img/theme/pcr.jpg); background-size: cover; background-position: center top;";>
                     
                 <!-- Mask -->
                 <span class="mask bg-gradient-default opacity-7"></span>
@@ -289,7 +289,7 @@
                         <div class="col-lg-7 col-md-10">
                             <h1 class="display-2 text-white">Hello Jesse</h1>
                             <p class="text-white mt-0 mb-5">Ini adalah halaman yang berisi daftar transaksi peminjaman yang sedang berlangsung. dan kamu juga dapat melakukan peminjaman !</p>
-                            <a href="FormPeminjaman.jsp" class="btn btn-neutral">Pinjam ruangan</a>
+                            <a href="FormPeminjaman.jsp" class="btn btn-neutral">Pinjam Disini</a>
                         </div>
                     </div>
                 </div>

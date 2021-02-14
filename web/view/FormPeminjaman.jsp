@@ -272,16 +272,19 @@
             </nav>
 
             <!-- Header -->
-            <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(assets/img/theme/yuda.jpg); background-size: cover; background-position: center top;">
+            <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(assets/img/theme/pcr.jpg); background-size: cover; background-position: center top;">
                 <!-- Mask -->
                 <span class="mask bg-gradient-default opacity-8"></span>
                 <!-- Header container -->
                 <div class="container-fluid d-flex align-items-center">
                     <div class="row">
                         <div class="col-lg-7 col-md-10">
-                            <h1 class="display-2 text-white">Hello Jesse</h1>
-                            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-                            <a href="#!" class="btn btn-neutral">Edit profile</a>
+                            <h1 class="display-2 text-white">Form Peminjaman</h1>
+                            <p class="text-white mt-0 mb-5">Isilah form peminjaman sesuai dengan informasi ruangan yang akan dipinjam. Pastikan kamu telah membaca beberapa peraturan yang terkait sebelum melakukan peminjaman!</p>
+                            <a class="btn btn-neutral" href="index.jsp">
+                                <i class="ni ni-bold-left text-primary btn-group"></i>
+                                <span class="btn-group">Kembali</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -375,7 +378,7 @@
                                     </div>
 
                                     <div class="form-group text-center">
-                                        <input type="submit" class="btn btn-primary" value="Ajukan Peminjaman">
+                                        <input type="submit" class="btn btn-primary" value="Pinjam Sekarang">
                                     </div>
                                 </form>
                             </div>
