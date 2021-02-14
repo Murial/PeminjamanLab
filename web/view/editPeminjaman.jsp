@@ -1,6 +1,6 @@
 <%-- 
-    Document   : TambahPinjamLab
-    Created on : Feb 10, 2021, 5:41:18 PM
+    Document   : editPeminjaman
+    Created on : Feb 13, 2021, 8:18:21 PM
     Author     : ASUS
 --%>
 
@@ -10,20 +10,18 @@
 
 <script type="text/javascript">
     function successAlert() {
-        alert("Data BERHASIL diinputkan");
+        alert("Data BERHASIL diupdate");
     }
     
     function failedAlert() {
-        alert("Data GAGAL diinputkan");
+        alert("Data GAGAL diupdate");
     }
 </script> 
 
 
-
 <%
-    int i = PinjamLabHome.save(pl);
-    System.out.println(i);
-
+    int i = PinjamLabHome.update(pl);
+    
     if (i > 0) {
         %>
         <script type="text/javascript"> window.onload = successAlert;</script>

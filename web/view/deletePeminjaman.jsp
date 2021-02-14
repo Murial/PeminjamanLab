@@ -1,6 +1,6 @@
 <%-- 
-    Document   : TambahPinjamLab
-    Created on : Feb 10, 2021, 5:41:18 PM
+    Document   : deletePeminjaman
+    Created on : Feb 13, 2021, 7:59:59 PM
     Author     : ASUS
 --%>
 
@@ -10,20 +10,16 @@
 
 <script type="text/javascript">
     function successAlert() {
-        alert("Data BERHASIL diinputkan");
+        alert("Data BERHASIL dihapus");
     }
-    
     function failedAlert() {
-        alert("Data GAGAL diinputkan");
+        alert("Data GAGAL dihapus");
     }
-</script> 
-
-
+}
 
 <%
-    int i = PinjamLabHome.save(pl);
-    System.out.println(i);
-
+    int i = PinjamLabHome.delete(pl);
+    
     if (i > 0) {
         %>
         <script type="text/javascript"> window.onload = successAlert;</script>

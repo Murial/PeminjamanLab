@@ -137,6 +137,39 @@ public class PinjamLabHome {
         return ids;
     }
 
+    public static PinjamLab getPinjamLabById(String id_peminjaman_r) {
+        PinjamLab pl = null;
+        String pwd = "";
+        String login = "root";
+        Connection con = null;
+        ResultSet rs = null;
+        AksesJdbc db = new AksesJdbc("lab_db", login, pwd);
+            String sql = "SELECT id_peminjaman_r, id_user, id_ruangan, cek_in, cek_out, keperluan  FROM peminjaman_r WHERE id_peminjaman_r='" + id_peminjaman_r + "'";
+        try {
+            con = db.connect();
+            rs = db.executeQuery(sql);
+            if (rs.next()) {
+                pl = new PinjamLab();
+                pl.setId_peminjaman_r(rs.getString("id_peminjaman_r"));
+                pl.setId_user(rs.getString("id_user"));
+                pl.setId_ruangan(rs.getString("id_ruangan"));
+                pl.setCek_in(rs.getString("cek_in"));
+                pl.setCek_out(rs.getString("cek_out"));
+                pl.setKeperluan(rs.getString("keperluan"));
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                db.disconnect();
+                return pl;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return pl;
+            }
+        }
+    }
+
     public static int save(PinjamLab pl) throws SQLException, ParseException {
         int status = 0;
 
@@ -152,6 +185,36 @@ public class PinjamLabHome {
             ps.setString(4, pl.getCek_in());
             ps.setString(5, pl.getCek_out());
             ps.setString(6, pl.getKeperluan());
+            status = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+
+    public static int delete(PinjamLab pl) {
+        int status = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("DELETE FROM peminjaman_r WHERE id_peminjaman_r = ?");
+            ps.setString(1, pl.getId_peminjaman_r());
+            status = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return status;
+    }
+
+    public static int update(PinjamLab pl) {
+        int status = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE peminjaman_r set id_ruangan=?, cek_in=?, cek_out=?, keperluan=? WHERE id_peminjaman_r=?");
+            ps.setString(1, pl.getId_ruangan());
+            ps.setString(2, pl.getCek_in());
+            ps.setString(3, pl.getCek_out());
+            ps.setString(4, pl.getKeperluan());
+            ps.setString(5, pl.getId_peminjaman_r());
             status = ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

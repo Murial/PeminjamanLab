@@ -9,9 +9,24 @@
 <%@page import="model.*" %>
 <%@page import="controller.*" %>
 <jsp:useBean id="Ruang" class="model.Ruang" />
+<jsp:useBean id="PinjamLab" class="model.PinjamLab" />
+<jsp:useBean id="PinjamLabHome" class="controller.PinjamLabHome" />
 <% Ruang r = null;
     Ruang[] daftarRuang = (new PinjamLabHome()).getDaftarRuang();
 %>
+<%
+    String id_peminjaman_r = request.getParameter("id_peminjaman_r");
+    PinjamLab pl = PinjamLabHome.getPinjamLabById(id_peminjaman_r);
+%>
+
+<jsp:setProperty name="PinjamLab" property="id_peminjaman_r" value="<%=pl.getId_peminjaman_r()%>" />
+<jsp:setProperty name="PinjamLab" property="id_user" value="<%=pl.getId_user()%>" />
+<jsp:setProperty name="PinjamLab" property="id_ruangan" value="<%=pl.getId_ruangan()%>" />
+<jsp:setProperty name="PinjamLab" property="cek_in" value="<%=pl.getCek_in()%>" />
+<jsp:setProperty name="PinjamLab" property="cek_out" value="<%=pl.getCek_out()%>" />
+<jsp:setProperty name="PinjamLab" property="keperluan" value="<%=pl.getKeperluan()%>" />
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -302,18 +317,21 @@
                             <div class="card-body">
                                 
                                 <!--FORM-->
-                                <form action="TambahPinjamLab.jsp" method="POST">
+                                
+                                <form action="editPeminjaman.jsp" method="POST">
                                     <h6 class="heading-small text-muted mb-4">Informasi Lab</h6>
                                     <div class="pl-lg-4">
                                         <div class="row">
                                             <div class="col">
+                                                
+                                                <p><jsp:getProperty name="PinjamLab" property="cek_in" /></p>
                                                 
                                                 <!--PILIH RUANGAN-->
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="input-username">Pilih Ruangan</label>
                                                     <select class="form-control" name="id_ruangan">
                                                         
-                                                        <option disabled selected value> -- Pilih Ruangan -- </option>
+                                                        <option value="<jsp:getProperty name="PinjamLab" property="id_ruangan" />"> <jsp:getProperty name="PinjamLab" property="id_ruangan" /> </option>
                                                         
                                                         <%
                                                             for (int i = 0; i < daftarRuang.length; i++) {
@@ -346,7 +364,7 @@
                                                 <!--CHECK IN-->
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="input-username">Check-In</label>
-                                                    <input type="datetime-local" id="input-username" class="form-control" name="cek_in">
+                                                    <input type="datetime-local" id="input-username" class="form-control" name="cek_in" value="<jsp:getProperty name="PinjamLab" property="cek_in" />">
                                                 </div>
                                                 
                                             </div>
@@ -355,7 +373,7 @@
                                                 <!--CHECK OUT-->
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="input-email">Check-Out</label>
-                                                    <input type="datetime-local" id="input-email" class="form-control" name="cek_out">
+                                                    <input type="datetime-local" id="input-email" class="form-control" name="cek_out" value="<jsp:getProperty name="PinjamLab" property="cek_out" />">
                                                 </div>
                                                 
                                             </div>
@@ -369,13 +387,15 @@
                                         <!--KEPERLUAN-->
                                         <div class="form-group">
                                             <label class="form-control-label">Keperluan Peminjam</label>
-                                            <input type="text" class="form-control" placeholder="Alasan keperluan peminjaman ..." name="keperluan">
+                                            <input type="text" class="form-control" placeholder="Alasan keperluan peminjaman ..." name="keperluan" value="<jsp:getProperty name="PinjamLab" property="keperluan" />">
                                         </div>
                                         
                                     </div>
+                                        
+                                        <input type="hidden" name="id_peminjaman_r" value="<%=pl.getId_peminjaman_r()%>"/>
 
                                     <div class="form-group text-center">
-                                        <input type="submit" class="btn btn-primary" value="Ajukan Peminjaman">
+                                        <input type="submit" class="btn btn-primary" value="UPDATE DATA">
                                     </div>
                                 </form>
                             </div>

@@ -367,8 +367,8 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="#">Hapus</a>
+                                                        <a class="dropdown-item" href="formEditPeminjaman.jsp?id_peminjaman_r=<%=pl.getId_peminjaman_r()%>">Edit</a>
+                                                        <a class="dropdown-item text-danger" href="deletePeminjaman.jsp?id_peminjaman_r=<%=pl.getId_peminjaman_r()%>">Hapus</a>
                                                     </div>
                                                 </div>
                                             </td>
